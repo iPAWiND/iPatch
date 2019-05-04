@@ -4,7 +4,7 @@ Patch iPA Files With Dynamic Libraries (Mac)
 ## Getting Started
 
 ```
-cd ~/Desktop && git clone https://github.com/iPAWiND/iPatch.git && chmod +x iPatch/ipatch.sh
+cd ~/Desktop && git clone https://github.com/iPAWiND/iPatch.git && chmod +x iPatch/ipatch.sh iPatch/optool
 ```
 
 ### Usage
