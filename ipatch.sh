@@ -6,6 +6,7 @@
 ipaFile=$1
 dylibFolder=$2
 profilePath=$3
+savedProfilePath="./embedded.mobileprovision"
 
 printf "\n"
 
@@ -65,12 +66,20 @@ for dylibPath in "$dylibs"; do
 
 done
 
-if [ -z "$profilePath" ]; then
-    echo "Profile path not specified, skipping codesign"
+#if no profile specified, and saved profile exists, use it
+if [ -z "$profilePath" ] && [ -e "$savedProfilePath" ]; then
+    profilePath="$savedProfilePath"
+fi
+
+if ! [ -e "$profilePath" ]; then
+    echo "Profile not found, skipping codesign"
 else
 
     #copy profile to app
     cp "$profilePath" "$appPath/embedded.mobileprovision"
+
+    #save profile
+    cp "$profilePath" "$savedProfilePath" &> /dev/null
 
     #profile
     profilePlistPath="$tmpDir/embedded.plist"
